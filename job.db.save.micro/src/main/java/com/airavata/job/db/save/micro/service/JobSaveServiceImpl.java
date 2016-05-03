@@ -21,9 +21,10 @@ public class JobSaveServiceImpl implements JobSaveService {
 		try {
 			
 			jobDbSaveRepository.save(jobDetails);
+			
 		} catch (Exception e) {
 			// TODO: handle exception
-			
+			e.printStackTrace();
 			return 0;
 		}
 		return 1;

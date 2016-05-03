@@ -3,8 +3,10 @@ package com.airavata.job.db.save.micro.entity;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +27,7 @@ public class JobDetails implements Serializable {
 	@Column
 	private String jobId;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private User user;
 
@@ -50,14 +52,14 @@ public class JobDetails implements Serializable {
 	@Column
 	private String time;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "job_status_id")
 	private Status status;
 
 	@Column
 	private String elapsTime;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "job_type_id")
 	private Type type;
 
@@ -67,7 +69,7 @@ public class JobDetails implements Serializable {
 	@Column(columnDefinition = "timestamp without time zone")
 	private Timestamp updts;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "host_id", columnDefinition="integer DEFAULT 0 NOT NULL")
 	private Host host;
 

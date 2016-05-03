@@ -43,8 +43,7 @@ public class JobSubmissionController {
 	@Autowired
 	private JobManagement jobManagementService;
 
-	@RequestMapping(value = "/jobSubmissionService/submitJobs", method = RequestMethod.POST)
-	@Produces(MediaType.APPLICATION_JSON)
+	@RequestMapping(value = "/jobSubmissionService/submitJobs", method = RequestMethod.POST)	
 	public JobDetails submitJob(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("file") MultipartFile[] multipartFile, @RequestParam("hostType") int hostType,
 			@RequestParam("jobType") int jobType, @RequestParam("noOfNodes") String noOfNodes,
