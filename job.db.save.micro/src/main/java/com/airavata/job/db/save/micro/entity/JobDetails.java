@@ -27,7 +27,7 @@ public class JobDetails implements Serializable {
 	@Column
 	private String jobId;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	private User user;
 

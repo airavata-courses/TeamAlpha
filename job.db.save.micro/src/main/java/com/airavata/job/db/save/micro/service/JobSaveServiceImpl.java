@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.airavata.job.db.save.micro.entity.JobDetails;
+import com.airavata.job.db.save.micro.entity.User;
 import com.airavata.job.db.save.micro.repository.JobDbSaveRepository;
+import com.airavata.job.db.save.micro.repository.UserRepository;
 
 @Repository
 @Service
@@ -16,10 +18,16 @@ public class JobSaveServiceImpl implements JobSaveService {
 	@Autowired
 	private JobDbSaveRepository jobDbSaveRepository;
 	
+	@Autowired
+	private UserRepository userRepo;
+	
 	public int saveJobDetails(JobDetails jobDetails) {
 			
 		try {
 			
+			User user = userRepo.findUser(jobDetails.getUser().getUsername());
+			
+			jobDetails.setUser(user);
 			jobDbSaveRepository.save(jobDetails);
 			
 		} catch (Exception e) {
