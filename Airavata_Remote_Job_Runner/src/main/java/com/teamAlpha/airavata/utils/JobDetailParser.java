@@ -96,7 +96,7 @@ public class JobDetailParser {
 				job.setStatus(status);
 				break;
 			case 10:
-				job.setElapTime(st.nextToken());
+				job.setElapsTime(st.nextToken());
 				break;
 			default:
 				break;

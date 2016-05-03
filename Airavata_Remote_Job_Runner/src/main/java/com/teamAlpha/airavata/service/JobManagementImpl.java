@@ -11,6 +11,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.ws.rs.core.MultivaluedHashMap;
+import javax.ws.rs.core.MultivaluedMap;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +23,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.Gson;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpATTRS;
 import com.jcraft.jsch.SftpException;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 import com.teamAlpha.airavata.domain.ConnectionEssential;
 import com.teamAlpha.airavata.domain.Host;
 import com.teamAlpha.airavata.domain.JobDetails;
@@ -346,7 +352,27 @@ public class JobManagementImpl implements JobManagement {
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("submitJob() -> Saving job details to database. Job : " + jd.toString());
 			}
-			jobRepo.add(jd);
+			//jobRepo.add(jd);
+			
+			/*
+			 * Call Job Save Micro Service
+			 */
+			
+			RestClientService restClient = new RestClientServiceImpl();
+			
+			Gson gson = new Gson();
+			String jsonData = gson.toJson(jd);
+			MultivaluedMap requestData = new MultivaluedMapImpl();
+			requestData.add("job", jsonData);
+
+			ClientResponse restResponse = restClient.post("http://localhost:7892/jobSaveService/saveJob",
+					requestData);
+
+			
+			/*
+			 * ****************************************
+			 */
+			
 
 			if (LOGGER.isDebugEnabled()) {
 				LOGGER.debug("submitJob() -> Job details saved to database. Job : " + jd.toString());
