@@ -1,1 +1,2 @@
 This is a simple test to see if I can trigger a Jenkins build. Still testing, trying to get to work on CentOS 6.7. Still testing. Had to add a "postgres" user that was required by the db script. Trying again with corrected manager password, which required a server restart. Had to set the postgres user password at the command line.
+Trying again with DB using md5 in config file; see issue #35
