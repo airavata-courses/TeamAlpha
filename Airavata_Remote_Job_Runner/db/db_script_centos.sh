@@ -3,8 +3,8 @@ service postgresql status
 if [ "$?" -gt "0" ]
  then
         sudo yum -y update
-        sudo yum -y install postgresql-client postgresql postgresql-contrib postgres-server
-        sudo mkdir /var/lib/pgsql/data/
+        sudo yum -y install postgresql-client postgresql postgresql-contrib postgresql-server
+        sudo mkdir -p /var/lib/pgsql/data/
         service postgresql initdb
         service postgresql start
         sudo -u postgres psql postgres -a -f /opt/scripts/airavata_ddl_20160321.sql
