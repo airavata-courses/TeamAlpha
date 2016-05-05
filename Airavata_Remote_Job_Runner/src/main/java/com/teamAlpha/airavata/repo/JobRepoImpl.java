@@ -67,7 +67,7 @@ public class JobRepoImpl implements JobRepo {
 		params.put("noOfTasks", jobDetails.getNoOfTasks());
 		params.put("memory", jobDetails.getMemory());
 		params.put("time", jobDetails.getTime());
-		params.put("elapsTime", jobDetails.getElapTime());
+		params.put("elapsTime", jobDetails.getElapsTime());
 		params.put("jobStatusId", jobDetails.getStatus().getId());
 		params.put("hostId", jobDetails.getHost().getId());
 		params.put("remotePath", jobDetails.getRemotePath());
@@ -97,7 +97,7 @@ public class JobRepoImpl implements JobRepo {
 		params.put("jobId", jobDetails.getJobId());
 		params.put("jobName", jobDetails.getJobName());
 		params.put("sessionId", jobDetails.getSessionId());
-		params.put("elapsTime", jobDetails.getElapTime());
+		params.put("elapsTime", jobDetails.getElapsTime());
 		params.put("status", jobDetails.getStatus().getId());
 
 		if (LOGGER.isDebugEnabled()) {
@@ -187,7 +187,7 @@ public class JobRepoImpl implements JobRepo {
 			jobDetails.setNoOfTasks(rs.getInt("no_of_tasks"));
 			jobDetails.setMemory(rs.getString("memory"));
 			jobDetails.setTime(rs.getString("time"));
-			jobDetails.setElapTime(rs.getString("elaps_time"));
+			jobDetails.setElapsTime(rs.getString("elaps_time"));
 
 			Status status = new Status();
 			status.setName(rs.getString("sname"));
