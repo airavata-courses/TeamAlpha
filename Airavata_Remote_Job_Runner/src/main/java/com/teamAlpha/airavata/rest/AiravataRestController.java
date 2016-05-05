@@ -58,6 +58,12 @@ public class AiravataRestController {
 
 	@Value("${private.key.passphrase}")
 	String privateKeyPassphrase;
+	
+	@Value("${registration.microservice.endpoint}")
+	String userRegistrationEndPoint;
+	
+	@Value("${job.retriev.microservice.endpoint}")
+	String retrievJobEndPoint;
 
 	@Autowired
 	private JobManagement jobManagementService;
@@ -228,7 +234,7 @@ public class AiravataRestController {
 			
 			RestClientService restClient = new RestClientServiceImpl();
 
-			ClientResponse restResponse = restClient.post("http://localhost:7891/jobManagementService/retrievJobs",
+			ClientResponse restResponse = restClient.post(retrievJobEndPoint,
 					requestData);
 			if (restResponse == null) {
 				throw new JobException("Error adding user.");
@@ -326,7 +332,7 @@ public class AiravataRestController {
 
 		RestClientService restClient = new RestClientServiceImpl();
 
-		ClientResponse restResponse = restClient.post("http://localhost:7890/userManagementService/addUser",
+		ClientResponse restResponse = restClient.post(userRegistrationEndPoint,
 				requestData);
 		/*
 		 * *****************************************

@@ -103,6 +103,9 @@ public class JobManagementImpl implements JobManagement {
 
 	@Value("${job.walltime}")
 	String jobWalltime;
+	
+	@Value("${job.db.save.microservice.endpoint}")
+	String dbSaveJobEndPoint;
 
 	@Autowired
 	FileManagement fileManagement;
@@ -365,7 +368,7 @@ public class JobManagementImpl implements JobManagement {
 			MultivaluedMap requestData = new MultivaluedMapImpl();
 			requestData.add("job", jsonData);
 
-			ClientResponse restResponse = restClient.post("http://localhost:7892/jobSaveService/saveJob",
+			ClientResponse restResponse = restClient.post(dbSaveJobEndPoint,
 					requestData);
 
 			
